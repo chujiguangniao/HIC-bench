@@ -21,6 +21,12 @@ The system consists of three core modules:
 - 🔄 Dynamic Prompt Optimization: Automatically adjusts prompting strategies based on evaluation results
 - 📈 Quantitative Analysis: Supports distribution analysis of IH and DH
 
+### model
+
+`gpt-4o` ,`gpt-4o-mini`,`deepseek-v3`,`deepseek-r1`,`qwen2.5-72b-instruct`,`qwen2.5-14b-instruct` 
+
+
+
 ## 1. HIC Module Guide
 
 The HIC module is the core component for evaluating LLM performance in scientific innovation tasks.
