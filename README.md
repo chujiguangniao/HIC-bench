@@ -1,10 +1,13 @@
 # Heaven-Sent or Hell-Bent? Benchmarking the Intelligence and Defectiveness of LLM Hallucinations
 
+![image](https://github.com/user-attachments/assets/cd652394-c84d-46cd-8e4f-50e6c134c605)
+
+
 HIC-Bench is an innovative evaluation framework for studying the dual nature of hallucinations in Large Language Models (LLMs). By categorizing hallucinations into Intelligent Hallucinations (IH) and Defective Hallucinations (DH), we examine their interplay through LLM creativity across open-ended innovation tasks in ten scientific domains.
 
 This repository contains the datasets and evaluation scripts for the paper **Heaven-Sent or Hell-Bent? Benchmarking the Intelligence and Defectiveness of LLM Hallucinations**. HIC-Bench is a set of benchmark tasks and datasets crafted to evaluate the classification and assessment of hallucinations in Large Language Models (LLMs), classifying their intelligent and defective aspects from the perspective of creativity in open-ended scientific tasks across various domains.
 
-## System Overview
+## Framework Overview
 
 The system consists of three core modules:
 - **HIC (IH&DH)**: Evaluates LLM hallucinations in open-ended innovation tasks
