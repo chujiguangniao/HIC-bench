@@ -1,6 +1,6 @@
 #对模型进行Simcse测试，计算每个领域的平均相似度，得到Flu
 import torch
-import pandas as pd
+import json
 import itertools
 from scipy.spatial.distance import cosine
 from transformers import AutoModel, AutoTokenizer
@@ -10,13 +10,15 @@ model_path_simcse = "./models/sup-simcse-bert-base-uncased"
 tokenizer_simcse = AutoTokenizer.from_pretrained(model_path_simcse)
 model_simcse = AutoModel.from_pretrained(model_path_simcse)
 
-# 读取 Excel 文件
-file_path = "result/normal/Qwen2.5-72b_answers.xlsx"  # 请修改为你的 Excel 文件路径
-df = pd.read_excel(file_path, header=None)
+# 读取 JSON 文件
+file_path = "HIC/result/scp/Qwen2.5-72b_answers.json"  # JSON 文件路径
+with open(file_path, 'r', encoding='utf-8') as f:
+    data = json.load(f)
 
-sentences = df.iloc[:, 0].tolist()  # 假设句子在第一列
+# 提取所有答案
+sentences = [item['answer'] for item in data]
 
-num_questions = len(sentences) // 10  # 计算问题的总数
+num_questions = len(sentences)  # 计算问题的总数
 num_domains = num_questions // 10  # 计算领域总数（每 10 个问题为一个领域）
 
 # 计算每个领域的平均相似度
@@ -55,4 +57,5 @@ print("Domain Similarities:", [round(sim, 4) for sim in domain_similarities])
 # 输出总体平均相似度
 total_avg_similarity = sum(domain_similarities) / len(domain_similarities)
 print(f"Total Average Similarity: {total_avg_similarity:.4f}")
+
 

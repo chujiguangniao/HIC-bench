@@ -2,7 +2,7 @@ import os
 import numpy as np
 
 # 定义文件夹列表
-folders = ["normal", "COT", "RAG", "RCP", "T0-4"]
+folders = ["SCP", "COT", "RAG", "RCP", "T0-4"]
 # 定义模型名称列表
 models = ["chatgpt-4o-mini", "chatgpt-4o", "deepseek-v3", "deepseek-r1", "Qwen2.5-14b", "Qwen2.5-72b"]
 
