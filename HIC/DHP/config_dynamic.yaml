@@ -1,0 +1,34 @@
+api_settings:
+  api_key: "sk-6k6bKhMdjDlRtwSTJ61qZCjnKXX3Q5O2sl4dHa0vAul4RStd"
+  base_url: "https://api.chatanywhere.tech/v1"
+
+answer_model_settings:
+  model_name: "gpt-4o-mini"
+  temperature: 1.0
+  max_tokens: 700
+
+evaluation_model_settings:
+  model_name: "gpt-4o-mini"
+  temperature: 0
+  max_tokens: 200
+
+data_settings:
+  dataset_path: "../CDID.csv"
+  question_column: 2
+  principle_column: 3
+
+output_settings:
+  answers_path: "answers.json"
+  evaluation_path: "evaluation.txt"
+
+fields:
+  - "Quantum Physics"
+  - "Artificial Intelligence"
+  - "Biomedical Sciences"
+  - "Environmental Science"
+  - "Materials Science"
+  - "Energy Technology"
+  - "Neuroscience"
+  - "Information and Communication Technology"
+  - "Aerospace"
+  - "Social Sciences" 

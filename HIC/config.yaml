@@ -1,0 +1,36 @@
+# Model API Parameters
+model_api_key: "sk-6k6bKhMdjDlRtwSTJ61qZCjnKXX3Q5O2sl4dHa0vAul4RStd"
+model_base_url: "https://api.chatanywhere.tech/v1"
+model_name: "gpt-4o-mini"
+model_temperature: 1.0
+model_max_tokens: 700
+
+# Evaluator Parameters
+eval_api_key: "sk-6k6bKhMdjDlRtwSTJ61qZCjnKXX3Q5O2sl4dHa0vAul4RStd"
+eval_base_url: "https://api.chatanywhere.tech/v1"
+eval_model_name: "gpt-4o-mini"
+eval_temperature: 0
+eval_max_tokens: 200
+
+# Prompt Type
+prompt_type: "scp"  # Options: scp, cot, rag, rcp
+
+# File Paths
+dataset_path: "CDID.csv"
+output_dir: "result"
+
+# Start Question
+start_question: 1
+
+# 領域列表
+fields:
+  - "Quantum Physics"
+  - "Artificial Intelligence"
+  - "Biomedical Sciences"
+  - "Environmental Science"
+  - "Materials Science"
+  - "Energy Technology"
+  - "Neuroscience"
+  - "Information and Communication Technology"
+  - "Aerospace"
+  - "Social Sciences" 
