@@ -58,4 +58,3 @@ print("Domain Similarities:", [round(sim, 4) for sim in domain_similarities])
 total_avg_similarity = sum(domain_similarities) / len(domain_similarities)
 print(f"Total Average Similarity: {total_avg_similarity:.4f}")
 
-
