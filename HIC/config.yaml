@@ -1,16 +1,16 @@
 # Model API Parameters
-model_api_key: "sk-6k6bKhMdjDlRtwSTJ61qZCjnKXX3Q5O2sl4dHa0vAul4RStd"
-model_base_url: "https://api.chatanywhere.tech/v1"
-model_name: "gpt-4o-mini"
-model_temperature: 1.0
-model_max_tokens: 700
+model_api_key: "api_key"     #your api key
+model_base_url: "url"        #your base url
+model_name: "gpt-4o-mini"    #your model name
+model_temperature: 1.0       #your temperature
+model_max_tokens: 700        #your max tokens
 
 # Evaluator Parameters
-eval_api_key: "sk-6k6bKhMdjDlRtwSTJ61qZCjnKXX3Q5O2sl4dHa0vAul4RStd"
-eval_base_url: "https://api.chatanywhere.tech/v1"
-eval_model_name: "gpt-4o-mini"
-eval_temperature: 0
-eval_max_tokens: 200
+eval_api_key: "api_key"      #your api key
+eval_base_url: "url"         #your base url
+eval_model_name: "gpt-4o-mini" #your model name
+eval_temperature: 0          #your temperature
+eval_max_tokens: 200         #your max tokens
 
 # Prompt Type
 prompt_type: "scp"  # Options: scp, cot, rag, rcp
@@ -22,7 +22,7 @@ output_dir: "result"
 # Start Question
 start_question: 1
 
-# 領域列表
+# 领域列表
 fields:
   - "Quantum Physics"
   - "Artificial Intelligence"

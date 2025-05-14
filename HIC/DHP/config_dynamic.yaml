@@ -1,6 +1,6 @@
 api_settings:
-  api_key: "sk-6k6bKhMdjDlRtwSTJ61qZCjnKXX3Q5O2sl4dHa0vAul4RStd"
-  base_url: "https://api.chatanywhere.tech/v1"
+  api_key: "api_key" #your api key
+  base_url: "url" #your base url
 
 answer_model_settings:
   model_name: "gpt-4o-mini"

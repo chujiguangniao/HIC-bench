@@ -1,6 +1,6 @@
 """
 提示模板配置文件
-包含所有用於不同模型的提示模板
+包含所有用于不同模型的提示模板
 """
 
 # 基本提示模板
@@ -13,7 +13,7 @@ Please provide an answer to the following questions, not exceeding 70 tokens. Re
 Format: Plain text, no numbering or Markdown. There is a blank line between the answers
 Question: {question}"""
 
-# 思維鏈提示模板
+# 思维链提示模板
 COT_PROMPT = """Assume you are an expert in {field}. 
 Please provide an answer to the following questions, not exceeding 70 tokens. Requirements:
 1. Ensure feasibility by grounding in current scientific principles and technological trends;
@@ -35,7 +35,7 @@ Please provide an answer to the following questions, not exceeding 70 tokens. Re
 Format: Plain text, no numbering or Markdown. There is a blank line between the answers
 Question: {question}"""
 
-# 寬鬆約束提示模板
+# 宽松約束提示模板
 RCP_PROMPT = """Assume you are an expert in {field}. 
 Please provide an answer to the following questions, not exceeding 70 tokens. Requirements:
 1. Propose novel concepts or methods, avoiding unsupported speculation;
@@ -43,7 +43,7 @@ Please provide an answer to the following questions, not exceeding 70 tokens. Re
 Format: Plain text, no numbering or Markdown. There is a blank line between the answers
 Question: {question}"""
 
-# 評估系統提示
+# 评估系統提示
 EVALUATION_SYSTEM_PROMPT = """You are a rigorous evaluator specialized in assessing the scientific innovation quality of LLM-generated answers. 
 Be highly critical and avoid giving high scores to generic or vague answers.
 1. Evaluation Criteria (1-5 Scale):

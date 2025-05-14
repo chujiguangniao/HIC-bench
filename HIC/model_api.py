@@ -14,11 +14,11 @@ class ModelAPI:
         初始化模型API
         
         Args:
-            api_key (str): API密鑰
-            base_url (str): API基礎URL
-            model_name (str): 模型名稱
-            temperature (float): 溫度參數
-            max_tokens (int): 最大token數
+            api_key (str): API密钥
+            base_url (str): API基础URL
+            model_name (str): 模型名称
+            temperature (float): 温度参数
+            max_tokens (int): 最大token数
         """
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.model_name = model_name
@@ -27,17 +27,17 @@ class ModelAPI:
 
     def get_prompt(self, prompt_type, question, field=None, principle=None, knowledge=None):
         """
-        獲取提示詞模板
+        获取提示词模板
         
         Args:
-            prompt_type (str): 提示詞類型
-            question (str): 問題
-            field (str): 領域
-            principle (str): 原則
-            knowledge (str): 知識庫
+            prompt_type (str): 提示词类型
+            question (str): 问题
+            field (str): 领域
+            principle (str): 原则
+            knowledge (str): 知识库
             
         Returns:
-            str: 格式化後的提示詞
+            str: 格式化后的提示词
         """
         if prompt_type == 'scp':
             return SCP_PROMPT.format(field=field, question=question)
@@ -52,13 +52,13 @@ class ModelAPI:
 
     def generate_response(self, prompt):
         """
-        生成模型回應
+        生成模型回应
         
         Args:
-            prompt (str): 提示詞
+            prompt (str): 提示词
             
         Returns:
-            str: 模型回應
+            str: 模型回应
         """
         response = self.client.chat.completions.create(
             model=self.model_name,
@@ -71,18 +71,18 @@ class ModelAPI:
 
     def save_responses(self, question, response, prompt_type, output_file):
         """
-        保存模型回應到JSON文件
+        保存模型回应到JSON文件
         
         Args:
-            question (str): 問題
-            response (str): 模型回應
-            prompt_type (str): 提示詞類型
-            output_file (str): 輸出文件路徑
+            question (str): 问题
+            response (str): 模型回应
+            prompt_type (str): 提示词类型
+            output_file (str): 输出文件路径
         """
-        # 創建輸出目錄
+        # 创建输出目录
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
-        # 準備要保存的數據
+        # 准备数据
         data = {
             "model_name": self.model_name,
             "prompt_type": prompt_type,
@@ -91,7 +91,7 @@ class ModelAPI:
             "response": response
         }
 
-        # 如果文件存在，讀取現有數據
+        # 如果文件存在，读取数据
         if os.path.exists(output_file):
             with open(output_file, 'r', encoding='utf-8') as f:
                 try:
@@ -101,35 +101,35 @@ class ModelAPI:
         else:
             existing_data = []
 
-        # 添加新數據
+        # 添加新数据
         existing_data.append(data)
 
-        # 保存更新後的數據
+        # 保存更新后的数据
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(existing_data, f, ensure_ascii=False, indent=2)
 
     def process_question(self, question, prompt_type, field=None, principle=None, knowledge=None, output_file=None):
         """
-        處理單個問題
+        处理单个问题
         
         Args:
-            question (str): 問題
-            prompt_type (str): 提示詞類型
-            field (str): 領域
-            principle (str): 原則
-            knowledge (str): 知識庫
-            output_file (str): 輸出文件路徑
+            question (str): 问题
+            prompt_type (str): 提示词类型
+            field (str): 领域
+            principle (str): 原则
+            knowledge (str): 知识库
+            output_file (str): 输出文件路径
             
         Returns:
-            str: 模型回應
+            str: 模型回应
         """
-        # 獲取提示詞
+        # 获取提示词
         prompt = self.get_prompt(prompt_type, question, field, principle, knowledge)
         
-        # 生成回應
+        # 生成回应
         response = self.generate_response(prompt)
         
-        # 保存回應到JSON
+        # 保存回应到JSON
         if output_file:
             self.save_responses(question, response, prompt_type, output_file)
         

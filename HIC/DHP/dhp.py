@@ -9,10 +9,10 @@ from datetime import datetime
 
 class DynamicPromptModel:
     def __init__(self, config_path: str = "config_dynamic.yaml"):
-        # 獲取當前文件的目錄
+        # 获取当前文件的目录
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
         
-        # 加載配置
+        # 加载配置
         self.config = self._load_config(config_path)
         
         # 初始化 OpenAI 客戶端
@@ -21,22 +21,22 @@ class DynamicPromptModel:
             base_url=self.config["api_settings"]["base_url"]
         )
         
-        # 初始化動態提示詞示例
+        # 初始化动态提示词示例
         self.dynamic_prompt_examples = {"positive": "", "negative": ""}
         
-        # 處理輸出路徑
+        # 处理输出路径
         answers_dir = os.path.dirname(self.config["output_settings"]["answers_path"])
         eval_dir = os.path.dirname(self.config["output_settings"]["evaluation_path"])
         
-        # 如果是相對路徑，則相對於當前文件所在目錄
+        # 如果是相对路径，则相对于当前文件所在目录
         if not os.path.isabs(self.config["output_settings"]["answers_path"]):
             self.config["output_settings"]["answers_path"] = os.path.join(self.base_dir, self.config["output_settings"]["answers_path"])
         if not os.path.isabs(self.config["output_settings"]["evaluation_path"]):
             self.config["output_settings"]["evaluation_path"] = os.path.join(self.base_dir, self.config["output_settings"]["evaluation_path"])
 
     def _load_config(self, config_path: str) -> dict:
-        """加載配置文件"""
-        # 如果是相對路徑，則相對於當前文件所在目錄
+        """加载配置文件"""
+        # 如果是相对路径，则相对于当前文件所在目录
         if not os.path.isabs(config_path):
             config_path = os.path.join(self.base_dir, config_path)
             
@@ -44,8 +44,8 @@ class DynamicPromptModel:
             return yaml.safe_load(f)
 
     def _load_questions(self) -> tuple:
-        """從 CDID 數據集加載問題和原理"""
-        # 處理數據集路徑
+        """从 CDID 数据集加载问题和原理"""
+        # 处理数据集路径
         dataset_path = self.config["data_settings"]["dataset_path"]
         if not os.path.isabs(dataset_path):
             dataset_path = os.path.join(self.base_dir, dataset_path)
@@ -57,7 +57,7 @@ class DynamicPromptModel:
         )
 
     def _update_prompt(self) -> str:
-        """更新動態提示詞"""
+        """更新动态提示词"""
         return (f"Assume you are an expert in the given field. "
                 f"Please provide an answers to the following question,not exceeding 70 tokens. "
                 f"Requirements:\n"
@@ -70,7 +70,7 @@ class DynamicPromptModel:
                 f"{self.dynamic_prompt_examples['negative']}")
 
     def _evaluate_answer(self, question: str, answer: str) -> str:
-        """評估回答"""
+        """评估回答"""
         system_prompt = (
             "You are a rigorous evaluator specialized in assessing the scientific innovation quality of LLM-generated answers. "
             "Be highly critical and avoid giving high scores to generic or vague answers."
@@ -126,7 +126,7 @@ class DynamicPromptModel:
         return response.choices[0].message.content.strip()
 
     def _save_answers_to_json(self, answers: List[str], question_info: Dict[str, Any]) -> None:
-        """將回答保存為 JSON 格式"""
+        """将回答保存为 JSON 格式"""
         answer_data = {
             "question_id": question_info["global_index"] + 1,
             "field": question_info["field"],
@@ -135,7 +135,7 @@ class DynamicPromptModel:
             "answers": answers
         }
 
-        # 讀取現有數據或創建新的數據列表
+        # 读取现有数据或创建新的数据列表
         try:
             with open(self.config["output_settings"]["answers_path"], 'r', encoding='utf-8') as f:
                 all_data = json.load(f)
@@ -144,12 +144,12 @@ class DynamicPromptModel:
 
         all_data.append(answer_data)
 
-        # 保存更新後的數據
+        # 保存更新后的数据
         with open(self.config["output_settings"]["answers_path"], 'w', encoding='utf-8') as f:
             json.dump(all_data, f, ensure_ascii=False, indent=2)
 
     def process_questions(self, start_question: int = 1) -> None:
-        """處理所有問題並生成回答"""
+        """处理所有问题并生成回答"""
         questions, principles = self._load_questions()
 
         start_global_index = start_question - 1
@@ -171,7 +171,7 @@ class DynamicPromptModel:
                                                     start=start_question_index if field_index == start_field_index else 0):
                 global_question_index = field_index * 10 + i
 
-                print(f"處理問題 {global_question_index + 1}/{len(questions)} 在 {field} 領域...")
+                print(f"处理问题 {global_question_index + 1}/{len(questions)} 在 {field} 领域...")
 
                 # 生成回答
                 prompt = self._update_prompt()
@@ -194,7 +194,7 @@ class DynamicPromptModel:
                     }
                 )
 
-                # 評估回答並更新動態提示詞
+                # 评估回答并更新动态提示词
                 best_positive = {"score": 0, "text": ""}
                 best_negative = ""
 
@@ -204,7 +204,7 @@ class DynamicPromptModel:
                         print(eval_result)
                         f.write(f"{global_question_index * 10 + a_index + 1}: {eval_result}\n")
 
-                        # 解析評估結果
+                        # 解析评估结果
                         parts = eval_result.split()
                         scores = {
                             parts[0].strip(":"): int(parts[1]),
@@ -213,7 +213,7 @@ class DynamicPromptModel:
                         }
                         hallucination = parts[7].strip().lower() == "yes"
 
-                        # 更新動態提示詞示例
+                        # 更新动态提示词示例
                         total_score = sum(scores.values())
                         if scores["Originality"] >= 4 and scores["Feasibility"] >= 3 and scores["Value"] >= 4:
                             if total_score > best_positive["score"]:
@@ -229,9 +229,9 @@ class DynamicPromptModel:
 
                 time.sleep(1)
 
-        print("處理完成。")
+        print("处理完成。")
 
 if __name__ == "__main__":
-    # 創建模型實例並運行
+    # 创建模型实例并运行
     model = DynamicPromptModel()
     model.process_questions(start_question=1) 

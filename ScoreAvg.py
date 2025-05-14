@@ -1,5 +1,5 @@
 # 对评分进行汇总
-file_path = "result/SCP/Qwen2.5-72b_evaluation.txt"
+file_path = "HIC/result/SCP/Qwen2.5-72b_evaluation.txt"
 
 # 初始化变量
 num_domains = 10  # 领域数量
