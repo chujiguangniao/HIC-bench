@@ -1,5 +1,11 @@
 # Heaven-Sent or Hell-Bent? Benchmarking the Intelligence and Defectiveness of LLM Hallucinations
 
+## 📣News
+
+* [2025/11/25]🎉🎉🎉HIC-Bench has been accepted by KDD 2026. 
+
+
+
 ![image](https://github.com/user-attachments/assets/cd652394-c84d-46cd-8e4f-50e6c134c605)
 
 
@@ -100,3 +106,19 @@ python Flexibility.py
 2. We generate and evaluate ten responses for each piece of data.
 3. Result Interpretation: Pay attention to IH and DH characteristics
 
+
+
+## 📌Citation
+
+If you find our work useful, please cite:
+
+```bibtex
+@inproceedings{
+    yang2025heavensent,
+    title={Heaven-Sent or Hell-Bent? Benchmarking the Intelligence and Defectiveness of {LLM} Hallucinations},
+    author={Chengxu Yang and Jingling Yuan and Siqi Cai and Jiawei Jiang and Chuang Hu},
+    booktitle={32nd SIGKDD Conference on Knowledge Discovery and Data Mining - Datasets and Benchmarks Track},
+    year={2025},
+    url={https://openreview.net/forum?id=2mptJYdAMO}
+}
+```
